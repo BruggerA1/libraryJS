@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>lib.GG</title>
+
+	<link rel="stylesheet" href="style.css">
+
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+</head>
+
+<!-- Main Window (Content) -->
+
+<body>
+	<!-- Header (Title / Nav) -->
+	<header>LIBRARY</header>
+
+	<!-- Book Shelf (Container) -->
+	<main>
+		<!-- Book Divs HERE -->
+	</main>
+
+	<!-- Add Book (Button / Modal) -->
+	<section>
+		<div id="add-button">
+			<span id="add-icon" class="material-icons"> add_circle </span>
+			<span id="add-text">ADD BOOK</span>
+		</div>
+	</section>
+
+	<!-- Footer (Info / Links) -->
+	<footer>A bru.GG Production</footer>
+</body>
+
+<!-- Add Book Window (Modal) -->
+<div id="modal" class="modal-toggle">
+	<span id="modal-close" class="material-icons">clear </span>
+	<form name="addBookForm" id="modal-form" action="">
+		<input type="text" placeholder="Title">
+		<input type="text" placeholder="Author">
+		<div id="form-pages">
+			<input type="number" placeholder="# of Pages">
+			<div id="form-read">
+				<input type="checkbox" name="" id="">
+				<span> Read ? </span>
+			</div>
+		</div>
+	</form>
+	<span id="modal-submit" class="material-icons" onclick="">chevron_right </span>
+</div>
+
+</html>
+
+<script src="script.js"></script>
