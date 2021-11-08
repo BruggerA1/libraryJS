@@ -12,48 +12,39 @@
 
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Oswald&display=swap" rel="stylesheet">
+
 </head>
 
 <!-- Main Window (Content) -->
 
-<body>
-	<!-- Header (Title / Nav) -->
-	<header>LIBRARY</header>
-
-	<!-- Book Shelf (Container) -->
-	<main>
+<body id=library class="flex">
+	<header class="" id="libraryHeader">lib.GG</header>
+	<main id="bookContainer">
 		<!-- Book Divs HERE -->
 	</main>
 
-	<!-- Add Book (Button / Modal) -->
-	<section>
-		<div id="add-button">
-			<span id="add-icon" class="material-icons"> add_circle </span>
-			<span id="add-text">ADD BOOK</span>
-		</div>
-	</section>
+	<label class="flex" id=addBookLabel for="addBookButton">
+		<input class="material-icons button" id="addBookButton" type="button" value="add">
+		ADD BOOK
+	</label>
 
-	<!-- Footer (Info / Links) -->
-	<footer>A bru.GG Production</footer>
-</body>
+	<footer class="" id="libraryFooter">A bru.GG Production</footer>
 
-<!-- Add Book Window (Modal) -->
-<div id="modal" class="modal-toggle">
-	<span id="modal-close" class="material-icons">clear </span>
-	<form name="addBookForm" id="modal-form" action="">
-		<input type="text" placeholder="Title">
-		<input type="text" placeholder="Author">
-		<div id="form-pages">
-			<input type="number" placeholder="# of Pages">
-			<div id="form-read">
-				<input type="checkbox" name="" id="">
-				<span> Read ? </span>
-			</div>
-		</div>
+	<form class="modalToggle flex" id="formModal" name="addBookForm">
+		<input id="formClose" class="material-icons button" type="button" value="clear">
+		<input class="formField" id="formTitle" type="text" placeholder="Title">
+		<input class="formField" id="formAuthor" type="text" placeholder="Author">
+		<input class="formField" id="formPages" type="number" placeholder="# of Pages">
+		<label class="flex" id="formReadLabel" for="formRead"> 
+			<input id="formReadBox" type="checkbox">
+			Read ?
+		</label>
+		<input id="formSubmitButton" class="material-icons button" type="button" value="chevron_right">
 	</form>
-	<span id="modal-submit" class="material-icons" onclick="">chevron_right </span>
-</div>
-
+</body>
 </html>
 
 <script src="script.js"></script>
