@@ -26,12 +26,79 @@ const form = {
 	pages: document.getElementById('formPages'),
 	readBox: document.getElementById('formReadBox'),
 	editMode: false,
-	editIndex: null,
+	dbIndex: null,
 };
 
+function refreshBookList() {
+	// Clear Library
+	library.container.innerText = null;
+	// Add Up-To-Date Book Cards
+	library.db.forEach(book => createBookCard(book));;
+
+	form.editMode = false;
+	form.dbIndex = null;
+
+	form.data['formTitle'].value = '';
+	form.data['formAuthor'].value = '';
+	form.data['formPages'].value = '';
+	form.data['formReadBox'].checked = false;
+};
+
+function toggleModal() {
+	form.modal.classList.toggle('modalToggle');
+	refreshBookList();
+};
+
+function toggleReadBook(book) {
+	book.read = !book.read;
+	refreshBookList();
+};
+
+function editBook(book) {
+	toggleModal();
+
+	form.editMode = true;
+	form.dbIndex = library.db.indexOf(book);
+
+	form.title.value = book.title;
+	form.author.value = book.author;
+	form.pages.value = book.pages;
+	form.readBox.checked = book.read;
+};
+
+function deleteBookFromLibrary(book) {
+	// Remove Book from Database Array
+	library.db.splice(library.db.indexOf(book), 1);
+	refreshBookList();
+};
+
+function editBookInLibrary() {
+	library.db[form.dbIndex] = new Book(
+		form.data[1].value,
+		form.data[2].value,
+		form.data[3].value,
+		form.data[4].checked
+	);
+	refreshBookList();
+};
+
+function addBookToLibrary(book) {
+	// Add Book to Database Array
+	library.db.push(book);
+	refreshBookList();
+};
+
+function submitForm() {
+	(form.editMode == true) ? editBookInLibrary() : addBookToLibrary(new Book(
+		form.data['formTitle'].value,
+		form.data['formAuthor'].value,
+		form.data['formPages'].value,
+		form.data['formReadBox'].checked
+	));
+	toggleModal();
+};
 
 function createBookCard(book) {
-
 	const bookCard = {
 		container: document.createElement('div'),
 		statusContainer: document.createElement('div'),
@@ -79,74 +146,9 @@ function createBookCard(book) {
 	library.container.prepend(bookCard.container);
 };
 
-function refreshBookList() {
-	// Clear Library
-	library.container.innerText = null;
-	// Add Up-To-Date Book Cards
-	library.db.forEach(book => createBookCard(book));;
-};
-
-function addBookToLibrary(book) {
-	// Add Book to Database Array
-	library.db.push(book);
-	refreshBookList();
-};
-
-function deleteBookFromLibrary(book) {
-	// Remove Book from Database Array
-	library.db.splice(library.db.indexOf(book), 1);
-	refreshBookList();
-};
-
-function editBookInLibrary() {
-	library.db[form.editIndex] = new Book(
-		form.data[1].value,
-		form.data[2].value,
-		form.data[3].value,
-		form.data[4].checked
-	);
-	refreshBookList();
-}
-
-function toggleReadBook(book) {
-	book.read = !book.read;
-	refreshBookList();
-}
-
-function editBook(book) {
-	form.modal.classList.toggle('modalToggle');
-
-	form.editMode = true;
-	form.editIndex = library.db.indexOf(book);
-
-	form.title.value = book.title;
-	form.author.value = book.author;
-	form.pages.value = book.pages;
-	form.readBox.checked = book.read;
-}
-
-function submitForm() {
-	(form.editMode == true) ? editBookInLibrary() : addBookToLibrary(new Book(
-		form.data['formTitle'].value,
-		form.data['formAuthor'].value,
-		form.data['formPages'].value,
-		form.data['formReadBox'].checked
-	));
-
-	form.editMode = false;
-	form.editIndex = null;
-
-	form.data['formTitle'].value = '';
-	form.data['formAuthor'].value = '';
-	form.data['formPages'].value = '';
-	form.data['formReadBox'].checked = false;
-
-	form.modal.classList.toggle('modalToggle');
-}
-
 function init() {
-	library.addBookButton.addEventListener('click', () => form.modal.classList.toggle('modalToggle'));
-	form.closeButton.addEventListener('click', () => form.modal.classList.toggle('modalToggle'));
+	library.addBookButton.addEventListener('click', () => toggleModal());
+	form.closeButton.addEventListener('click', () => toggleModal());
 	form.submitButton.addEventListener('click', () => submitForm());
 
 	addBookToLibrary(new Book('The Incredibly Long Book Title of a Very Old and Boring Book', 'Author with Many Pretentious Names III', 294, false));
