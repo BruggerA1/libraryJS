@@ -1,50 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-	<title>lib.GG</title>
-
-	<link rel="stylesheet" href="style.css">
-
-	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Oswald&display=swap" rel="stylesheet">
-
-</head>
-
-<!-- Main Window (Content) -->
-
-<body id=library class="flex">
-	<header class="" id="libraryHeader">lib.GG</header>
-	<main id="bookContainer">
-		<!-- Book Divs HERE -->
-	</main>
-
-	<label class="flex" id=addBookLabel for="addBookButton">
-		<input class="material-icons button" id="addBookButton" type="button" value="add">
-		ADD BOOK
-	</label>
-
-	<footer class="" id="libraryFooter">A bru.GG Production</footer>
-
-	<form class="modalToggle flex" id="formModal" name="addBookForm">
-		<input id="formClose" class="material-icons button" type="button" value="clear">
-		<input class="formField" id="formTitle" type="text" placeholder="Title">
-		<input class="formField" id="formAuthor" type="text" placeholder="Author">
-		<input class="formField" id="formPages" type="number" placeholder="# of Pages">
-		<label class="flex" id="formReadLabel" for="formRead"> 
-			<input id="formReadBox" type="checkbox">
-			Read ?
-		</label>
-		<input id="formSubmitButton" class="material-icons button" type="button" value="chevron_right">
-	</form>
-</body>
-</html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+    <title>lib.GG</title>
+  
+    <link rel="stylesheet" href="style.css">
+  
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Oswald&display=swap" rel="stylesheet">
+  
+  </head>  
+  <body id=library class="flex">
+    <header class="" id="libraryHeader">lib.GG</header>
+    <main id="bookContainer">
+    </main>
+  
+    <label class="button flex" id=addBookLabel for="addBookButton">
+      <input class="material-icons button" id="addBookButton" type="button" value="add">
+      ADD BOOK
+    </label>
+  
+    <footer class="" id="libraryFooter">A bru.GG Production</footer>
+  
+    <form class="modalToggle flex" id="formModal" name="formData">
+      <input id="formCloseButton" class="material-icons button" type="button" value="clear">
+      <input class="formField" id="formTitle" type="text" placeholder="Title">
+      <input class="formField" id="formAuthor" type="text" placeholder="Author">
+      <input class="formField" id="formPages" type="number" placeholder="# of Pages">
+      <label class="flex" id="formReadLabel" for="formRead"> 
+        <input id="formReadBox" type="checkbox">
+        Read ?
+      </label>
+      <input id="formSubmitButton" class="material-icons button" type="button" value="chevron_right">
+    </form>
+  </body>
 
 <script src="script.js"></script>
+
+  </html>

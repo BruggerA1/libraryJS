@@ -1,23 +1,22 @@
-/* Global Settings */
+/* Global */
 * {
 	margin: 0;
 	padding: 0;
 
 	box-sizing: border-box;
+
 	font-family: 'Open Sans', sans-serif;
 	font-family: 'Oswald', sans-serif;
 }
 
 :root {
-
 }
 
 ::-webkit-scrollbar {
-    display: none;
+	display: none;
 }
 
-/* Classes */
-.flex { 
+.flex {
 	display: flex;
 
 	align-items: center;
@@ -29,140 +28,157 @@
 }
 
 .button {
-	background-image: radial-gradient(#000000,#ffffff);
-	background-size: 600% 600%;
-	filter: drop-shadow(0px 1px 0px #000000);
+	background: #e0e0e0;
 
+	border: none;
 	cursor: pointer;
-	
+
 	transition: 150ms ease-out;
 }
 
-.bookInfo {
-	font-size: 16pt;
-	border-right: solid 1px;
-	height: 100%;
-	line-height: 2em;
-}
-
-
-/* Main Containers */
+/* Library Content */
 #library {
 	height: 100vh;
 	width: 100vw;
-	
+
 	flex-direction: column;
 
-	background-image: linear-gradient(45deg, #000000,#ffffff, #000000);
-	background-size: 400% 400%;
+	background: #e0e0e0;
 }
 
+
+
+/* Header */
 #libraryHeader {
-	line-height: 10vh;
 	width: 100vw;
+
+	line-height: 10vh;
 	text-align: center;
+
 	font-size: 36pt;
-	
 }
 
-#libraryFooter {
-	line-height: 5vh;
-	width: 100vw;
-	text-align: center;
-	font-size: 14pt;
-}
+/* Book Container */
 
 #bookContainer {
-	height: 70vh;
-	width: 80vmin;
-	border: solid 2px #000000;
-	border-radius: 16px 0;
-	overflow: scroll;
-	background-image: linear-gradient(225deg, #ffffff, #000000);
-	background-size: 100% 500%;
+	height: 72vh;
+	width: 90vmin;
 	padding: 4px;
-	filter: drop-shadow(0px 0px 4px #000000);
-}
 
+	border-radius: 24px;
+
+	overflow: scroll;
+	background: #e0e0e0;
+	box-shadow:  6px 6px 12px #bebebe,
+				 -3px -3px 6px #ffffff;
+}
 /* Book Card */
-#bookCard {
+.bookCard {
+	height: 16vh;
+	margin: 8px;
+	padding: 8px;
 	display: grid;
-	grid-template-columns: 2fr 10fr 48px;
+	grid-template-columns: 72px 10fr 72px;
 
 	align-items: center;
-	margin: 4px 4px 8px 4px;
+
+	border: solid 0px #1c1c1c;
+	border-radius: 12px;
+
+	background: #e0e0e0;
+	box-shadow:  1px 1px 2px #bebebe,
+				 -1px -1px 2px #ffffff;
+}
+.bookInfo {
+	height: 100%;
 	padding: 8px;
+	line-height: 6vh;
+	font-size: 22px;
 
-	border: solid 2px #000000;
-	border-radius: 8px;
-
-	background-image: linear-gradient(#ffffff, #000000);
-	background-size: 400% 400%;
-
-	filter: drop-shadow(2px 2px 2px #000000);
-}
-
-.bookStatusContainer {
-	flex-direction: column;
-	border-right: solid 1px;
-	padding-right: 8px;
-}
-
-.bookStatus {
-	width: 100%;
-	text-align: center;
-	padding: 4px;
-	font-size: 14pt;
-}
-
-#bookInfo {
-	padding: 8px;
 	overflow: hidden;
 	white-space: nowrap;
 	text-overflow: ellipsis;
-	
 }
 
-#toggleBook {
-	height: 54px;
-	width: 54px;
-	font-size: 24pt;
+.bookStatusContainer {
+	height: 50%;
+	padding-right: 8px;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	transform: scale(2.2);
+	color: #1c1c1c;
+	transition: 50ms ease;
+}
+
+.bookStatus {
+	font-size: 8px;
+	text-align: center;
+	text-align: center;
+}
+
+.toggleBook {
+	color: #1c1c1c;
+
+	border: none;
 	border-radius: 25%;
+
+	box-shadow: inset 2px 2px 2px #bebebe,
+	inset -2px -2px 2px #ffffff;
 }
 
-#deleteBook {
-	height: 42px;
-	width: 42px;
+.deleteBook {
+	height: 36px;
+	width: 36px;
+
 	align-self: center;
-	justify-self: center;
+	justify-self: flex-end;
+
 	border-radius: 50%;
-	font-size: 18pt;
-	justify-self: end;
-}	
+
+	font-size: 22pt;
+	border: none;
+
+	box-shadow:  3px 3px 6px #bebebe,
+	 -3px -3px 6px #ffffff;
+
+}
 
 /* Add Book Button */
 #addBookLabel {
 	padding: 8px;
-	border: solid 2px;
-	border-radius: 8px 0;
 
-	background-image: linear-gradient(45deg,#000000,#ffffff, #000000);
-	background-size: 250% 450%;
+	border-radius: 8px;
 
-	filter: drop-shadow(0px 2px 4px #000000);
+	font-size: 18pt;
+
+	background: #e0e0e0;
+	box-shadow:  2px 2px 4px #bebebe,
+				 -2px -2px 4px #ffffff;
 
 	cursor: pointer;
+
+	transition: 120ms ease;
 }
 
 #addBookButton {
-	height: 32px;
-	width: 32px;
+	height: 36px;
+	width: 36px;
 
 	margin-right: 8px;
 
 	border-radius: 50%;
+
+	font-size: 25pt;
+
+	transition: 50ms ease;
 }
 
+
+
+
+
+/* Book Form Modal*/
 /* Form Modal */
 #formModal {
 	height: 80vh;
@@ -170,70 +186,121 @@
 
 	flex-direction: column;
 	justify-content: center;
+
 	position: absolute;
 	top: 10vh;
 
-	border: solid 1px;
+	border: solid 0px;
 	border-radius: 16px 0;
 
-	background-image: linear-gradient(215deg, #ffffff, #000000);
-	background-size: 100% 400%;
-
-	filter: drop-shadow(0px 0px 16px #000000);
+	background: #e0e0e0;
+	box-shadow:  4px 4px 8px #bebebe,
+				 -4px -4px 8px #ffffff;
 }
 
-#formClose {
+#formCloseButton {
+	height: 48px;
+	width: 48px;
+
 	position: absolute;
 	top: 0;
 	left: 0;
+
 	margin: 8px;
+
 	border-radius: 50%;
-	height: 48px;
-	width: 48px;
+
 	font-size: 28pt;
+	border: none;
+
+	background-color: #e0e0e0;
+
+	box-shadow:  4px 4px 8px #bebebe,
+				 -4px -4px 8px #ffffff;
 }
 
 #formSubmitButton {
+	height: 92px;
+	width: 92px;
+
 	position: absolute;
 	bottom: 0;
 	right: 0;
+
 	margin: 8px;
+
 	border-radius: 25%;
-	height: 92px;
-	width: 92px;
+
 	font-size: 48pt;
+	border: none;
+
+	background-color: #e0e0e0;
+
+	box-shadow:  4px 4px 8px #bebebe,
+				 -4px -4px 8px #ffffff;
+
 }
 
 #formReadLabel {
 	height: 54px;
 	width: 150px;
+
 	margin: 8px;
+
 	justify-content: center;
+
 	font-size: 25pt;
 }
 
 #formReadBox {
-	margin-right: 8px;
 	height: 28px;
 	width: 28px;
+	background-color: #e0e0e0;
+
+	box-shadow:  1px 1px 2px #bebebe,
+				 -1px -1px 2px #ffffff;
+	margin-right: 8px;
+	
 }
+
+
 
 .formField {
 	height: 10%;
 	width: 75%;
+
 	margin: 8px;
 	padding: 32px;
+
 	border-radius: 32px;
+	border: none;
 	text-align: center;
 	font-size: 16pt;
+
+	background: #e0e0e0;
+
+	box-shadow: inset 4px 4px 8px #bebebe,
+				inset -4px -4px 8px #ffffff;
 }
 
-/* Book Modal */
+/* Footer */
+#libraryFooter {
+	width: 100vw;
 
+	line-height: 5vh;
+	text-align: center;
+	font-size: 14pt;
+}
 
 /* Animations */
 @keyframes backgroundFlow {
-	0% { background-position: 0% 50%; }
-	50% { background-position: 100% 50%; } 
-	100% { background-position: 0% 50%; }
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
 }
