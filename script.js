@@ -1,47 +1,54 @@
 class Book {
-	constructor(title, author, pages, read) {
+	constructor(title, author, pages, read, bookID = 0) {
 		this.title = title;
 		this.author = author;
 		this.pages = pages;
 		this.read = read;
+		this.bookID = bookID;
 	}
-	info() {
-		return `${this.title} \n ${this.author}`;
+	info() { 
+		return `${this.title} \n ${this.author}`; 
 	}
 };
 
 const library = {
-	db: [],
-	container: document.getElementById('bookContainer'),
 	addBookButton: document.getElementById('addBookButton'),
+	container: document.getElementById('bookContainer'),
+
+	db: [],
+	dbLastIndex: () => library.db.length - 1 ,
+
+	storage: window.localStorage,
 };
 
 const form = {
+	editMode: false,
 	data: document.forms['formData'],
+
 	modal: document.getElementById('formModal'),
 	closeButton: document.getElementById('formCloseButton'),
 	submitButton: document.getElementById('formSubmitButton'),
+
 	title: document.getElementById('formTitle'),
 	author: document.getElementById('formAuthor'),
 	pages: document.getElementById('formPages'),
+	bookID: null,
 	readBox: document.getElementById('formReadBox'),
-	editMode: false,
-	dbIndex: null,
 };
 
 function refreshBookList() {
 	// Clear Library
-	library.container.innerText = null;
+	library.container.innerText =
+		form.editMode =
+		form.title.value =
+		form.author.value =
+		form.pages.value =
+		form.bookID =
+		form.readBox.checked = null;
+
 	// Add Up-To-Date Book Cards
 	library.db.forEach(book => createBookCard(book));;
 
-	form.editMode = false;
-	form.dbIndex = null;
-
-	form.data['formTitle'].value = '';
-	form.data['formAuthor'].value = '';
-	form.data['formPages'].value = '';
-	form.data['formReadBox'].checked = false;
 };
 
 function toggleModal() {
@@ -56,29 +63,36 @@ function toggleReadBook(book) {
 
 function editBook(book) {
 	toggleModal();
-
 	form.editMode = true;
-	form.dbIndex = library.db.indexOf(book);
 
 	form.title.value = book.title;
 	form.author.value = book.author;
 	form.pages.value = book.pages;
 	form.readBox.checked = book.read;
+	form.bookID = book.bookID;
 };
 
 function deleteBookFromLibrary(book) {
 	// Remove Book from Database Array
 	library.db.splice(library.db.indexOf(book), 1);
+
+	Object.values(localStorage).forEach(value => {
+		let bookData = JSON.parse(value);
+		if (bookData.bookID == book.bookID) localStorage.removeItem(bookData.bookID);
+	})
+
 	refreshBookList();
 };
 
 function editBookInLibrary() {
-	library.db[form.dbIndex] = new Book(
-		form.data[1].value,
-		form.data[2].value,
-		form.data[3].value,
-		form.data[4].checked
+	library.db[form.bookID] = new Book(
+		form.title.value,
+		form.author.value,
+		form.pages.value,
+		form.readBox.checked,
+		form.bookID,
 	);
+	saveToLocalStorage(library.db[form.bookID])
 	refreshBookList();
 };
 
@@ -89,12 +103,19 @@ function addBookToLibrary(book) {
 };
 
 function submitForm() {
-	(form.editMode == true) ? editBookInLibrary() : addBookToLibrary(new Book(
-		form.data['formTitle'].value,
-		form.data['formAuthor'].value,
-		form.data['formPages'].value,
-		form.data['formReadBox'].checked
-	));
+	let newBook = new Book(
+		form.title.value,
+		form.author.value,
+		form.pages.value,
+		form.readBox.checked,
+		library.dbLastIndex() + 1,
+	);
+	if (form.editMode == true) {
+		editBookInLibrary();
+	} else {
+		addBookToLibrary(newBook);
+		saveToLocalStorage(newBook);
+	};
 	toggleModal();
 };
 
@@ -146,13 +167,31 @@ function createBookCard(book) {
 	library.container.prepend(bookCard.container);
 };
 
+function saveToLocalStorage(book) {
+	library.storage.setItem(`${book.bookID}`, JSON.stringify(book));
+};
+
+function loadLocalStoage() {
+	let bookData = Object.values(localStorage).map(book => JSON.parse(book));
+
+	bookData.sort((a, b) => (a.bookID > b.bookID) ? 1 : -1);
+
+	bookData.forEach(book => {
+		let newBook = new Book(
+			book.title, 
+			book.author, 
+			book.pages, 
+			book.read, 
+			book.bookID);
+		addBookToLibrary(newBook);
+	});
+};
+
 function init() {
 	library.addBookButton.addEventListener('click', () => toggleModal());
 	form.closeButton.addEventListener('click', () => toggleModal());
 	form.submitButton.addEventListener('click', () => submitForm());
-
-	addBookToLibrary(new Book('The Incredibly Long Book Title of a Very Old and Boring Book', 'Author with Many Pretentious Names III', 294, false));
-	addBookToLibrary(new Book('Short Title', 'Anonymous', 100, true));
+	loadLocalStoage();
 };
 
 init();
